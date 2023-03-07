@@ -1,0 +1,219 @@
+% This must be in the first 5 lines to tell arXiv to use pdfLaTeX, which is strongly recommended.
+\pdfoutput=1
+% In particular, the hyperref package requires pdfLaTeX in order to break URLs across lines.
+
+\documentclass[11pt]{article}
+
+% Remove the "review" option to generate the final version.
+\usepackage{ACL2023}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% For proper rendering and hyphenation of words containing Latin characters (including in bib files)
+\usepackage[T1]{fontenc}
+% For Vietnamese characters
+% \usepackage[T5]{fontenc}
+% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
+
+% This assumes your files are encoded as UTF8
+\usepackage[utf8]{inputenc}
+
+% This is not strictly necessary, and may be commented out.
+% However, it will improve the layout of the manuscript,
+% and will typically save some space.
+\usepackage{microtype}
+
+% This is also not strictly necessary, and may be commented out.
+% However, it will improve the aesthetics of text in
+% the typewriter font.
+\usepackage{inconsolata}
+
+
+% If the title and author information does not fit in the area allocated, uncomment the following
+%
+%\setlength\titlebox{<dim>}
+%
+% and set <dim> to something 5cm or larger.
+
+\title{<Team Name> at SemEval-2023 Task 4: <Descriptive Title>}
+
+% Author information can be set in various styles:
+% For several authors from the same institution:
+% \author{Author 1 \and ... \and Author n \\
+%         Address line \\ ... \\ Address line}
+% if the names do not fit well on one line use
+%         Author 1 \\ {\bf Author 2} \\ ... \\ {\bf Author n} \\
+% For authors from different institutions:
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \And  ... \And
+%         Author n \\ Address line \\ ... \\ Address line}
+% To start a seperate ``row'' of authors use \AND, as in
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \AND
+%         Author 2 \\ Address line \\ ... \\ Address line \And
+%         Author 3 \\ Address line \\ ... \\ Address line}
+
+\author{First Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  \texttt{email@domain} \\\And
+  Second Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  \texttt{email@domain} \\}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+The abstract should contain a few sentences summarizing the paper
+
+Instruction on submission requirements can be found here: \url{https://semeval.github.io/paper-requirements.html} (important points repeated below). A suggested structure (that this template follows) and examples can be found here: \url{https://semeval.github.io/system-paper-template.html}. We here assume your paper covers only this task. Otherwise, please check the web pages carefully for necessary changes.
+
+This paper can be up to 5 pages excluding acknowledgments, references, and appendices. You can add an additional page for camera ready submission.
+
+You have to use the title as above, just replace "<Team Name>" and "<Descriptive Title>". Usual patterns are to use you team's TIRA code name as "<Team Name>" or to start "<Descriptive Title>" with "The <TIRA code name> approach [to/of/...]".
+
+At SemEval, papers are not anonymous when submitted for review.
+
+Your paper should focus on:
+\par\noindent{\bf Replicability}: present all details that will allow someone else to replicate your system. Provide links to code repositories if you made your code open source, and the docker image name if you used Docker submission. {\bf Note:} We will in our overview paper and at other opportunities point out which approaches are available open source and (even better) as Docker image to promote their widespread usage. If you re-submit your approach as Docker image in TIRA until the camera-ready deadline (and it produces the same results), please tell us so that we can include it in our overview paper.
+\par\noindent{\bf Analysis}: focus more on results and analysis and less on discussing rankings; report results on several runs of the system (even beyond the official submissions); present ablation experiments showing usefulness of different features and techniques; show comparisons with baselines.
+\par\noindent{\bf Duplication}: cite the task description paper \cite{kiesel:2023}; you can avoid repeating details of the task and data, however, briefly outlining the task and relevant aspects of the data is a good idea. (The official BibTeX citations for papers will not be released until the camera-ready submission period; the current bibtex entry is a placeholder and we will send you the correct one later.)
+
+\end{abstract}
+
+\section{Introduction}
+When it comes to arguments, different people sharing the same values may have different opinions about whether one argument is persuasive or not. One cause of this is the different ordering of values used by people to assess arguments. Within computational linguistics, human values can provide context to categorize, compare, and evaluate argumentative statements, allowing for several applications: to inform social science research on values through large-scale data sets; to assess argumentation; generate or select arguments for a target audience; and to identify opposing and shared values on both sides of a controversial topic.\cite{mirzakhmedova:2023} Human Value Detection task \cite{kiesel:2023} struggles with automatic classification of textual arguments to determine whether an argument draws on a specific human value. Arguments collected from different resources within different countries with different beliefs. All arguments are in English.
+\par To tackle the classification problem, we proposed two multi-label classification systems, first one uses a fine-tuned version of RoBERTa language model \cite{Liu:2019} re-trained over task dataset \cite{mirzakhmedova:2023} and the second one uses a fine-tuned version of BERT \cite{Delvin:2018} re-trained over our proposed dataset augmented from main task data.
+\par Using our augmentation technique, increased the average F1 score of our BERT models by <EMPTY>\% but it has negligible effect on roBERTa models' F1 score. We submitted roBERTa's results over task's Main test set \cite{mirzakhmedova:2023} and ranked 14th among 41 submissions and submitted the results over Nahj al-Balaghafor set \cite{mirzakhmedova:2023} which placed us 7th among 21 participants. We provided all the codes necessary to replicate our work in this repository: <EMPTY>
+
+\section{Background}
+The main challenge of identifying human values of behind an argument is that the argument does not explicitly refer to the desired value. The first attempt to computationally extract human values behind an argument was done by \cite{kiesel:2022}. They first proposed a 4-level taxonomy of human values. For sake of this paper and this task \cite{kiesel:2023} we only used values from level 2 which consists of 20 value categories (Classes). After that they provided three baseline models to classify values in each level. Later on we compare our results to the result they \cite{kiesel:2022} obtained for level 2 value categories using these three baselines and one of our own baselines, which is zero-shot learning.
+\par We used task's main data which contains 9324 arguments on a variety of statements written in different styles, including religious texts (Nahj al-Balagha), political discussions (Group Discussion Ideas), free-text arguments (IBM-ArgQ-Rank-30kArgs), newspaper articles (The New York Times), community discussions (Zhihu), and democratic discourse (Conference on the Future of Europe) \cite{mirzakhmedova:2023}. All the arguments are translated into English. Each example in the dataset consists of two part: Argument (Input) and Value Categories (Output). Each argument has a Premise, a Stance and a Conclusion and a list of value categories (Classes) selected from all 20 value categories in level 2. Example arguments are then divided into 5 splits: train, validation, validation Zhihu, test, test Nahj al-Balagha and test New York Times. They also provided some description data to describe the meaning of each value category by providing examples for them. The original train set consists of 5393 examples. We also used the description dataset to add more examples to the data by creating new sentences and labels. We further explain this data generation process in next section.  
+
+\section{System Overview}
+Our proposed systems are heavily relied on transformer based pre-trained language models. Language modeling is the task of predicting the next word given a sequence of input words. Currently the state of the art results over language modeling are achieved by training transformer models. These models use attention mechanism at their core to first extract a representation for input sequence (Encoding) and then generate next word from extracted representation in a separate module (Decoding)\cite{Vaswani:2017}. Although language modeling is different from our classification task, we can transfer the learned knowledge about language from these models to our task by changing model's head which is the output layer of the decoder part of the transformer. Instead of predicting the next word using the output embeddings of the encoders, we classify these embeddings using a fully connected layer. We only need to train the classifier head. For the purpose of this task, we fine-tuned two widely used language models: BERT and roBERTa and compared them with three baseline models provided by \cite{kiesel:2022} and one baseline model of our own which is based on zero-shot learning.
+\par Our input data consists of three parts: Premise, Stance and Conclusion. We tested multiple concatenation of these parts to form a single sentence which will be fed to the transformer. We found out through experiment that the best concatenation is as follows:
+\par Input: {Conclusion} {Stance} {Premise}
+\par\noindent For example:
+\par Conclusion: We should ban fast food
+\par Stance: in favor of
+\par Premise: fast food should be banned because it is really bad for your health and is costly
+\par Input: We should ban fast food	in favor of	fast food should be banned because it is really bad for your health and is costly
+\par\noindent One of the challenging aspects of this task is the tendency of the models to not assign labels to the examples at all. For example in evaluating validation dataset using fine-tuned BERT, the number of times a value category outputted for dataset examples (True Positive + False Positive) are 5\% less than the number of times that value category was actually a label (True Positive). And as shown in <EMPTY> this problem is bigger when it comes to those value categories which had less representative data in training dataset. To tackle this problem, we proposed the idea of value definition for the model. Which means for each value category we provide the model with specific examples of that value category. These examples only belong to that category and help the model to learn that specific category alone. By incorporating this new data to train BERT model, we achieved 1.8\% increment in average F1 score over validation set and 3.3\% increment in average F1 score over Zhihu validation set. This dataset was created from value categories' description data provided by the task organizer. The provided description data contains nested dictionaries as follows:
+\begin{itemize}
+    \item level-2 value 1
+    \begin{itemize}
+        \item level-1 value 1
+        \begin{itemize}
+            \item definition 1
+            \item definition 2
+            \item ...
+        \end{itemize}
+        \item level-1 value 2
+        \item ...
+    \end{itemize}
+    \item level-2 value 2
+    \begin{itemize}
+        \item level-1 value k
+        \item level-1 value k+1
+        \item ...
+    \end{itemize}
+    \item ...
+\end{itemize}
+First dictionary contains the set of level-2 values as its keys and for each of them it stores another dictionary which contains a subset of level-1 values as it keys and for each key it stores a list of definitions. Notice that each level-2 value consists of different level-1 values. The following lines demonstrate a part of this data:
+\begin{itemize}
+    \item Security: personal (level-2 value)
+    \begin{itemize}
+        \item Have a sense of belonging (level-1 value)
+        \begin{itemize}
+            \item allowing people to establish groups
+            \item allowing group members to show they care for each other
+            \item ...
+        \end{itemize}
+        \item Have good health (level-1 value)
+        \item ...
+    \end{itemize}
+    \item Security: societal (level-2 value)
+    \item ...
+\end{itemize}
+To use this data during model training, we have to convert them to a set of sentences and labels (value categories). To do so we used the following pattern:
+\par Sentence: \{level-1 value\} means \{definition\}
+\par Label: level-2 value
+\par\noindent For example:
+\par Sentence: Have a sense of belonging means allowing people to establish groups.
+\par Label: Security: personal
+\par\noindent By running this pattern over description data, we can create a new set of data containing 218 new examples. Each of these examples contains only one label which corresponds to level-2 value it defines. For this data to affect the model, we need to add this new data multiple times. We found 6 to be a good number of repetition for this dataset, through experimenting multiple different choices of number. Then, using this new dataset, we fine-tuned (a.k.a trained a classifier head over) BERT model \cite{Delvin:2018}. We also checked the effect of this data augmentation technique on roBERTa which is a bigger language model than BERT.\cite{Liu:2019}. roBERTa performed better on original task data but we did not see any significant change in F1 score when using the augmented dataset. We also tested ensemble modeling (two models, first one predicting labels of arguments with 'against' stance and the second one predicting labels of arguments with 'in favor of' stance) but it didn't change the F1 score significantly. We also used a version of BART-large \cite{Lewis:2019} fine-tuned for zero-shot text classification \cite{Yin:2019} to determine whether there is a connection between an argument and a value category and used the result along with provided baselines by \cite{kiesel:2022} to compare our models' results with.
+
+\section{Experimental Setup}
+Task organizer divided data into 3 main sets (Train, Validation, Test) and 3 supplementary sets (Zhihu Validation, Nahj al-Balagha Test, The New York Times Test) \cite{mirzakhmedova:2023}. We also added 281 artificial examples with up-sampling factor of 6 to the train dataset of BERT. Hyper parameters of the model tuned with respect to both Validation set and Zhihu Validation set. 
+BERT models are trained using a single NVIDIA GeForce GTX 1650 for 5 epochs. To train roBERTa models we used Google COLAB environment which provided us with Tesla T4 GPUs. roBERTa models are trained for 8 epochs. The number of epochs determined by early stopping over Validation set. We calculated F1 score for each value category and reported the macro average over them.
+
+\section{Results}
+\includegraphics[width=0.5\textwidth]{images/val-set-comp.png}
+\begin{table*}
+\centering\small%
+\setlength{\tabcolsep}{2.5pt}%
+\begin{tabular}{@{}ll@{\hspace{10pt}}c@{\hspace{5pt}}cccccccccccccccccccccc@{}}
+\toprule
+\multicolumn{2}{@{}l}{\bf Test set / Approach} & \bf All & \rotatebox{90}{\bf Self-direction: thought} & \rotatebox{90}{\bf Self-direction: action} & \rotatebox{90}{\bf Stimulation} & \rotatebox{90}{\bf Hedonism} & \rotatebox{90}{\bf Achievement} & \rotatebox{90}{\bf Power: dominance} & \rotatebox{90}{\bf Power: resources} & \rotatebox{90}{\bf Face} & \rotatebox{90}{\bf Security: personal} & \rotatebox{90}{\bf Security: societal} & \rotatebox{90}{\bf Tradition} & \rotatebox{90}{\bf Conformity: rules} & \rotatebox{90}{\bf Conformity: interpersonal} & \rotatebox{90}{\bf Humility} & \rotatebox{90}{\bf Benevolence: caring} & \rotatebox{90}{\bf Benevolence: dependability} & \rotatebox{90}{\bf Universalism: concern} & \rotatebox{90}{\bf Universalism: nature} & \rotatebox{90}{\bf Universalism: tolerance} & \rotatebox{90}{\bf Universalism: objectivity} \\
+\midrule
+\multicolumn{2}{@{}l}{\emph{Main}} \\
+& \textcolor{gray}{Best per category} & \textcolor{gray}{.59} & \textcolor{gray}{.61} & \textcolor{gray}{.71} & \textcolor{gray}{.39} & \textcolor{gray}{.39} & \textcolor{gray}{.66} & \textcolor{gray}{.50} & \textcolor{gray}{.57} & \textcolor{gray}{.39} & \textcolor{gray}{.80} & \textcolor{gray}{.68} & \textcolor{gray}{.65} & \textcolor{gray}{.61} & \textcolor{gray}{.69} & \textcolor{gray}{.39} & \textcolor{gray}{.60} & \textcolor{gray}{.43} & \textcolor{gray}{.78} & \textcolor{gray}{.87} & \textcolor{gray}{.46} & \textcolor{gray}{.58} \\
+& \textcolor{gray}{Best approach} & \textcolor{gray}{.56} & \textcolor{gray}{.57} & \textcolor{gray}{.71} & \textcolor{gray}{.32} & \textcolor{gray}{.25} & \textcolor{gray}{.66} & \textcolor{gray}{.47} & \textcolor{gray}{.53} & \textcolor{gray}{.38} & \textcolor{gray}{.76} & \textcolor{gray}{.64} & \textcolor{gray}{.63} & \textcolor{gray}{.60} & \textcolor{gray}{.65} & \textcolor{gray}{.32} & \textcolor{gray}{.57} & \textcolor{gray}{.43} & \textcolor{gray}{.73} & \textcolor{gray}{.82} & \textcolor{gray}{.46} & \textcolor{gray}{.52} \\
+& \textcolor{gray}{BERT-kiesel} & \textcolor{gray}{.42} & \textcolor{gray}{.44} & \textcolor{gray}{.55} & \textcolor{gray}{.05} & \textcolor{gray}{.20} & \textcolor{gray}{.56} & \textcolor{gray}{.29} & \textcolor{gray}{.44} & \textcolor{gray}{.13} & \textcolor{gray}{.74} & \textcolor{gray}{.59} & \textcolor{gray}{.43} & \textcolor{gray}{.47} & \textcolor{gray}{.23} & \textcolor{gray}{.07} & \textcolor{gray}{.46} & \textcolor{gray}{.14} & \textcolor{gray}{.67} & \textcolor{gray}{.71} & \textcolor{gray}{.32} & \textcolor{gray}{.33} \\
+& \textcolor{gray}{1-Baseline} & \textcolor{gray}{.26} & \textcolor{gray}{.17} & \textcolor{gray}{.40} & \textcolor{gray}{.09} & \textcolor{gray}{.03} & \textcolor{gray}{.41} & \textcolor{gray}{.13} & \textcolor{gray}{.12} & \textcolor{gray}{.12} & \textcolor{gray}{.51} & \textcolor{gray}{.40} & \textcolor{gray}{.19} & \textcolor{gray}{.31} & \textcolor{gray}{.07} & \textcolor{gray}{.09} & \textcolor{gray}{.35} & \textcolor{gray}{.19} & \textcolor{gray}{.54} & \textcolor{gray}{.17} & \textcolor{gray}{.22} & \textcolor{gray}{.46} \\
+& zero-shot Baseline & .13 & .15 & .32 & .06 & .02 & .25 & .13 & .18 & .11 & .19 & .08 & .04 & .02 & .0 & .0 & .02 & .0 & .0 & .0 & .0 & .0 \\
+& BERT-ours & .44 & .53 & .59 & .07 & .28 & .57 & .32 & .45 & .16 & .73 & .59 & .44 & .47 & .16 & .12 & .52 & .15 & .7 & .74 & .31 & .41 \\
+& roBERTa* & .48 & .53 & .61 & .07 & .27 & .54 & .32 & .41 & .15 & .73 & .62 & .54 & .51 & .35 & .11 & .53 & .15 & .73 & .78 & .37 & .43 \\
+\addlinespace
+\multicolumn{2}{@{}l}{\emph{Nahj al-Balagha}} \\
+& \textcolor{gray}{Best per category} & \textcolor{gray}{.48} & \textcolor{gray}{.18} & \textcolor{gray}{.49} & \textcolor{gray}{.50} & \textcolor{gray}{.67} & \textcolor{gray}{.66} & \textcolor{gray}{.29} & \textcolor{gray}{.33} & \textcolor{gray}{.62} & \textcolor{gray}{.51} & \textcolor{gray}{.37} & \textcolor{gray}{.55} & \textcolor{gray}{.36} & \textcolor{gray}{.27} & \textcolor{gray}{.33} & \textcolor{gray}{.41} & \textcolor{gray}{.38} & \textcolor{gray}{.33} & \textcolor{gray}{.67} & \textcolor{gray}{.20} & \textcolor{gray}{.44} \\
+& \textcolor{gray}{Best approach} & \textcolor{gray}{.40} & \textcolor{gray}{.13} & \textcolor{gray}{.49} & \textcolor{gray}{.40} & \textcolor{gray}{.50} & \textcolor{gray}{.65} & \textcolor{gray}{.25} & \textcolor{gray}{.00} & \textcolor{gray}{.58} & \textcolor{gray}{.50} & \textcolor{gray}{.30} & \textcolor{gray}{.51} & \textcolor{gray}{.28} & \textcolor{gray}{.24} & \textcolor{gray}{.29} & \textcolor{gray}{.33} & \textcolor{gray}{.38} & \textcolor{gray}{.26} & \textcolor{gray}{.67} & \textcolor{gray}{.00} & \textcolor{gray}{.36} \\
+& \textcolor{gray}{BERT-kiesel} & \textcolor{gray}{.28} & \textcolor{gray}{.14} & \textcolor{gray}{.09} & \textcolor{gray}{.00} & \textcolor{gray}{.67} & \textcolor{gray}{.41} & \textcolor{gray}{.00} & \textcolor{gray}{.00} & \textcolor{gray}{.28} & \textcolor{gray}{.28} & \textcolor{gray}{.23} & \textcolor{gray}{.38} & \textcolor{gray}{.18} & \textcolor{gray}{.15} & \textcolor{gray}{.17} & \textcolor{gray}{.35} & \textcolor{gray}{.22} & \textcolor{gray}{.21} & \textcolor{gray}{.00} & \textcolor{gray}{.20} & \textcolor{gray}{.35} \\
+& \textcolor{gray}{1-Baseline} & \textcolor{gray}{.13} & \textcolor{gray}{.04} & \textcolor{gray}{.09} & \textcolor{gray}{.01} & \textcolor{gray}{.03} & \textcolor{gray}{.41} & \textcolor{gray}{.04} & \textcolor{gray}{.03} & \textcolor{gray}{.23} & \textcolor{gray}{.38} & \textcolor{gray}{.06} & \textcolor{gray}{.18} & \textcolor{gray}{.13} & \textcolor{gray}{.06} & \textcolor{gray}{.13} & \textcolor{gray}{.17} & \textcolor{gray}{.12} & \textcolor{gray}{.12} & \textcolor{gray}{.01} & \textcolor{gray}{.04} & \textcolor{gray}{.14} \\
+& zero-shot Baseline & .08 & .02 & .09 & .01 & .03 & .27 & .08 & .0 & .18 & .15 & .14 & .0 & .08 & .0 & .0 & .0 & .0 & .0 & .0 & .0 & .0 \\
+& BERT-ours & .27 & .11 & .21 & .0 & .33 & .46 & .0 & .0 & .26 & .35 & .29 & .42 & .17 & .14 & .26 & .32 & .29 & .35 & .5 & .0 & .37 \\
+& roBERTa* & .30 & .17 & .33 & .00 & .40 & .59 & .00 & .00 & .37 & .42 & .27 & .53 & .26 & .07 & .00 & .38 & .35 & .23 & .00 & .17 & .41 \\
+\addlinespace
+\multicolumn{2}{@{}l}{\emph{New York Times}} \\
+& \textcolor{gray}{Best per category} & \textcolor{gray}{.47} & \textcolor{gray}{.50} & \textcolor{gray}{.22} & \textcolor{gray}{-} & \textcolor{gray}{.03} & \textcolor{gray}{.54} & \textcolor{gray}{.40} & \textcolor{gray}{-} & \textcolor{gray}{.50} & \textcolor{gray}{.59} & \textcolor{gray}{.52} & \textcolor{gray}{-} & \textcolor{gray}{.33} & \textcolor{gray}{1.0} & \textcolor{gray}{.57} & \textcolor{gray}{.33} & \textcolor{gray}{.40} & \textcolor{gray}{.62} & \textcolor{gray}{1.0} & \textcolor{gray}{.03} & \textcolor{gray}{.46} \\
+& \textcolor{gray}{Best approach} & \textcolor{gray}{.34} & \textcolor{gray}{.22} & \textcolor{gray}{.22} & \textcolor{gray}{-} & \textcolor{gray}{.00} & \textcolor{gray}{.48} & \textcolor{gray}{.40} & \textcolor{gray}{-} & \textcolor{gray}{.00} & \textcolor{gray}{.53} & \textcolor{gray}{.44} & \textcolor{gray}{-} & \textcolor{gray}{.18} & \textcolor{gray}{1.0} & \textcolor{gray}{.20} & \textcolor{gray}{.12} & \textcolor{gray}{.29} & \textcolor{gray}{.55} & \textcolor{gray}{.33} & \textcolor{gray}{.00} & \textcolor{gray}{.36} \\
+& \textcolor{gray}{BERT-kiesel} & \textcolor{gray}{.24} & \textcolor{gray}{.00} & \textcolor{gray}{.00} & \textcolor{gray}{-} & \textcolor{gray}{.00} & \textcolor{gray}{.29} & \textcolor{gray}{.00} & \textcolor{gray}{-} & \textcolor{gray}{.00} & \textcolor{gray}{.53} & \textcolor{gray}{.43} & \textcolor{gray}{-} & \textcolor{gray}{.00} & \textcolor{gray}{.00} & \textcolor{gray}{.57} & \textcolor{gray}{.26} & \textcolor{gray}{.27} & \textcolor{gray}{.36} & \textcolor{gray}{.50} & \textcolor{gray}{.00} & \textcolor{gray}{.32} \\
+& \textcolor{gray}{1-Baseline} & \textcolor{gray}{.15} & \textcolor{gray}{.05} & \textcolor{gray}{.03} & \textcolor{gray}{-} & \textcolor{gray}{.03} & \textcolor{gray}{.28} & \textcolor{gray}{.03} & \textcolor{gray}{-} & \textcolor{gray}{.05} & \textcolor{gray}{.51} & \textcolor{gray}{.20} & \textcolor{gray}{-} & \textcolor{gray}{.07} & \textcolor{gray}{.03} & \textcolor{gray}{.12} & \textcolor{gray}{.12} & \textcolor{gray}{.26} & \textcolor{gray}{.24} & \textcolor{gray}{.03} & \textcolor{gray}{.03} & \textcolor{gray}{.33} \\
+& zero-shot Baseline & .05 & .06 & .03 & - & .06 & .17 & .0 & - & .0 & .06 & .0 & - & .0 & .0 & .0 & .0 & .0 & .0 & .0 & .0 & .0 \\
+& BERT-ours & .23 & .67 & .0 & - & .0 & .27 & .0 & - & .0 & .58 & .26 & - & .17 & .0 & .0 & .18 & .19 & .3 & .4 & .0 & .47 \\
+& roBERTa & .32 & .57 & .00 & - & .00 & .45 & .00 & - & .00 & .52 & .40 & - & .19 & 1.0 & .22 & .31 & .38 & .37 & .29 & .00 & .36 \\
+\bottomrule
+\end{tabular}
+\caption{Achieved F$_1$-score of team prodicus per test dataset, from macro-precision and macro-recall (All) and for each of the 20~value categories. Approaches marked with * were not part of the official evaluation. Approaches in gray are shown for comparison: an ensemble using the best participant approach for each individual category; the best participant approach; and the organizer's BERT and 1-Baseline. The New York Times dataset contains no argument resorting to Stimulation, Power: resources, or Tradition.}
+\label{table-results}
+\end{table*}
+
+roBERTa approach was performing 5\% (F1-score) better on Validation set and 4\% better on Zhihu Validation than BERT approach. Because of that we submitted roBERTa's results. We achieved 48\% F1-score over Main Test set which placed us 14th among 41 participants on the leader-board, 30\% over Nahj al-Balagha Test set which placed us 7th among 20 participants and 32\% over New York Times Test set, although we did not submitted this one. Our BERT approach which used augmented dataset performed 2\% better than \cite{kiesel:2022} purposed approach. On Main Test set, our roBERTa model performed 4\% better than our BERT model and 6\% better than \cite{kiesel:2022} BERT model. It performed 22\% better than 1-Baseline and 35\% better than zero-shot approach. More detailed results plus results for Nahj al-Balagha and New York Times set are presented at (Table 1).
+
+
+\section{Conclusion}
+A few summary sentences about your system, results, and ideas for future work.
+
+\section{Acknowledgments}
+Anyone you wish to thank who is not an author, which may include grants and anonymous reviewers.
+
+
+\bibliography{custom}
+\bibliographystyle{acl_natbib}
+
+\appendix
+\section{Appendix}
+Any low-level implementation details—rules and pre-/post-processing steps, features, hyperparameters, etc.—that would help the reader to replicate your system and experiments, but are not necessary to understand major design points of the system and experiments. Any figures or results that aren’t crucial to the main points in your paper but might help an interested reader delve deeper.
+
+If you feel like it, you might here show a picture of the person you chose for your TIRA code name and say a few words of who they are and what inspired you to pick their name from the list.
+
+\end{document}
